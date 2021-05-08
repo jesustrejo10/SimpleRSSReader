@@ -1,5 +1,6 @@
 package com.jesustrejo10.simplerssreader.ui.feed
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jesustrejo10.simplerssreader.R
 import com.jesustrejo10.simplerssreader.model.data.response.RssArticle
+import com.jesustrejo10.simplerssreader.ui.articledetail.ArticleDetailActivity
 import com.jesustrejo10.simplerssreader.ui.base.BaseActivity
 import com.jesustrejo10.simplerssreader.ui.model.OperationStatus
 import com.jesustrejo10.simplerssreader.ui.model.UiResponse
@@ -66,6 +68,8 @@ class FeedSetupActivity : BaseActivity(), ArticleListContract {
     }
 
     override fun onArticleClick(article: RssArticle) {
-        Toast.makeText(this,"on click in ${article.title}",Toast.LENGTH_LONG).show()
+        val intent = Intent(this,ArticleDetailActivity::class.java)
+        intent.putExtra("URL",article.url)
+        startActivity(intent)
     }
 }
