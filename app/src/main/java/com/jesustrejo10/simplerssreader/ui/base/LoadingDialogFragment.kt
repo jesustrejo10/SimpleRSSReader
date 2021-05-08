@@ -1,4 +1,4 @@
-package com.jesustrejo10.simplerssreader.ui
+package com.jesustrejo10.simplerssreader.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -43,7 +43,9 @@ class LoadingDialogFragment : DialogFragment(),
     }
 
     override fun show(manager: FragmentManager, tag: String?) {
-        super.show(manager, DIALOG_TAG)
+        super.show(manager,
+            DIALOG_TAG
+        )
         isShowing = true
     }
 

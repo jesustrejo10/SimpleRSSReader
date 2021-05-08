@@ -1,4 +1,4 @@
-package com.jesustrejo10.simplerssreader.ui
+package com.jesustrejo10.simplerssreader.ui.base
 
 import androidx.fragment.app.FragmentManager
 

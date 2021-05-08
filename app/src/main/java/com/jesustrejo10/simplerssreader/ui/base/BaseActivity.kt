@@ -1,11 +1,12 @@
-package com.jesustrejo10.simplerssreader.ui
+package com.jesustrejo10.simplerssreader.ui.base
 
 import androidx.appcompat.app.AppCompatActivity
 import java.lang.Exception
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    private val loadingDialogFragment : LoadingDialogControl = LoadingDialogFragment()
+    private val loadingDialogFragment : LoadingDialogControl =
+        LoadingDialogFragment()
 
     open fun displayLoading(){
         try{

@@ -1,4 +1,4 @@
-package com.jesustrejo10.simplerssreader.ui
+package com.jesustrejo10.simplerssreader.ui.authentication
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.jesustrejo10.simplerssreader.R
 import com.jesustrejo10.simplerssreader.model.data.response.AuthenticationResponse
+import com.jesustrejo10.simplerssreader.ui.base.BaseActivity
 import com.jesustrejo10.simplerssreader.ui.model.OperationStatus
 import com.jesustrejo10.simplerssreader.ui.model.UiResponse
 import dagger.hilt.android.AndroidEntryPoint

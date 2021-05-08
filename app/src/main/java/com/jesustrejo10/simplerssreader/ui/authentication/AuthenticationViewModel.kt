@@ -1,9 +1,10 @@
-package com.jesustrejo10.simplerssreader.ui
+package com.jesustrejo10.simplerssreader.ui.authentication
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jesustrejo10.simplerssreader.data.local.StaticValues
 import com.jesustrejo10.simplerssreader.model.data.request.AuthenticationRequest
 import com.jesustrejo10.simplerssreader.model.data.response.AuthenticationResponse
 import com.jesustrejo10.simplerssreader.model.usecases.LoginUseCase
@@ -30,6 +31,7 @@ class AuthenticationViewModel  @Inject constructor(
             signUpMutableLiveData.postValue(UiResponse.loading())
             val loginResult =signUpUseCase.invoke(AuthenticationRequest(userName,pass))
             if(loginResult.success){
+                StaticValues.AUTHENTICATION = loginResult.value?.authorizationToken ?: ""
                 signUpMutableLiveData.postValue(UiResponse.success(loginResult.value))
             }else{
                 signUpMutableLiveData.postValue(UiResponse.error(loginResult.errorMessage))
@@ -42,6 +44,7 @@ class AuthenticationViewModel  @Inject constructor(
             loginMutableLiveData.postValue(UiResponse.loading())
             val loginResult =loginUseCase.invoke(AuthenticationRequest(username,pass))
             if(loginResult.success){
+                StaticValues.AUTHENTICATION = loginResult.value?.authorizationToken ?: ""
                 loginMutableLiveData.postValue(UiResponse.success(loginResult.value))
             }else{
                 loginMutableLiveData.postValue(UiResponse.error(loginResult.errorMessage))
