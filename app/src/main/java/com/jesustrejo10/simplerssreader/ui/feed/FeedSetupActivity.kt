@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.feed_activity.*
 
 @AndroidEntryPoint
-class FeedSetupActivity : BaseActivity() {
+class FeedSetupActivity : BaseActivity(), ArticleListContract {
 
     private lateinit var viewModel: FeedSetupViewModel
 
@@ -60,8 +60,12 @@ class FeedSetupActivity : BaseActivity() {
             emptyStatus.visibility = View.VISIBLE
         }else{
             articleListRecyclerView.layoutManager = LinearLayoutManager(this)
-            val adapter = FeedAdapter(articleList)
+            val adapter = FeedAdapter(articleList,this)
             articleListRecyclerView.adapter = adapter
         }
+    }
+
+    override fun onArticleClick(article: RssArticle) {
+        Toast.makeText(this,"on click in ${article.title}",Toast.LENGTH_LONG).show()
     }
 }
