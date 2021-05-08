@@ -6,13 +6,13 @@ import com.jesustrejo10.simplerssreader.model.data.response.AuthenticationRespon
 import com.jesustrejo10.simplerssreader.model.exception.SimpleRSSException
 import javax.inject.Inject
 
-class SignUpUserUseCase @Inject constructor(private val signUpUseCaseDataSource: AuthenticationRemoteDataSource) :
+class LoginUseCase @Inject constructor(private val loginUseCaseDataSource: AuthenticationRemoteDataSource) :
     BaseAsyncUseCase<AuthenticationRequest, UseCaseResult<AuthenticationResponse?>>(){
 
 
     override suspend fun invoke(entry: AuthenticationRequest): UseCaseResult<AuthenticationResponse?> {
         return try{
-            UseCaseResult.success(signUpUseCaseDataSource.signUp(entry))
+            UseCaseResult.success(loginUseCaseDataSource.login(entry))
         }catch (e : SimpleRSSException){
             UseCaseResult.error(e.messageToView)
         }

@@ -3,7 +3,7 @@ package com.jesustrejo10.simplerssreader.model.usecases
 class UseCaseResult <T>(
     val success : Boolean = true,
     val value : T?, 
-    val errorMessage : String ? = "Unexpected error, please try again or contact support.") {
+    val errorMessage : String = "") {
     
     companion object{
         

@@ -6,4 +6,5 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="action_sign_in">Ingresar</string>
+    <string name="empty_field">this field is required</string>
 </resources>
