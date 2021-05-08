@@ -1,4 +1,4 @@
-package com.jesustrejo10.simplerssreader.core.model.data.requests
+package com.jesustrejo10.simplerssreader.model.data.request
 
 data class SignUpRequest(
     val user : String,

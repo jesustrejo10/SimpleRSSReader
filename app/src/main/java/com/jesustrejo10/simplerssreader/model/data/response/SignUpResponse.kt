@@ -1,4 +1,4 @@
-package com.jesustrejo10.simplerssreader.core.model.data.responses
+package com.jesustrejo10.simplerssreader.model.data.response
 
 import com.google.gson.annotations.SerializedName
 
