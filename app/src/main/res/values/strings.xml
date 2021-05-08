@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SimpleRssReader</string>
+    <string name="welcome_app">Welcome</string>
+    <string name="set_user_password">Set your user and password to access to the system</string>
+    <string name="those_will_allow_you_to_register">Those will allow you to register in the app.</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="action_sign_in">Ingresar</string>
 </resources>
