@@ -24,4 +24,8 @@ abstract class BaseActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
+    abstract fun manageViewComponents()
+
+    abstract fun manageObservers()
 }

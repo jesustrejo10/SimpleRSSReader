@@ -2,6 +2,7 @@ package com.jesustrejo10.simplerssreader.ui.authentication
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.jesustrejo10.simplerssreader.R
 import com.jesustrejo10.simplerssreader.model.data.response.AuthenticationResponse
 import com.jesustrejo10.simplerssreader.ui.base.BaseActivity
+import com.jesustrejo10.simplerssreader.ui.feed.FeedSetupActivity
 import com.jesustrejo10.simplerssreader.ui.model.OperationStatus
 import com.jesustrejo10.simplerssreader.ui.model.UiResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +29,7 @@ class AuthenticateActivity : BaseActivity() {
         manageObservers()
     }
 
-    private fun manageObservers() {
+    override fun manageObservers() {
 
         viewModel.loginLiveData.observe(this, Observer {
             manageLoginResponse(it)
@@ -98,10 +100,11 @@ class AuthenticateActivity : BaseActivity() {
     }
 
     private fun goToNextScreen() {
-        Toast.makeText(this,"success",Toast.LENGTH_LONG).show()
+        startActivity(Intent(this, FeedSetupActivity::class.java))
+        finish()
     }
 
-    private fun manageViewComponents() {
+    override fun manageViewComponents() {
         login.setOnClickListener{
             handleOperationRequest()
         }

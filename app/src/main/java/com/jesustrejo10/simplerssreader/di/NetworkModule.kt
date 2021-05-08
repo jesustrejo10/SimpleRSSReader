@@ -6,17 +6,22 @@ import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jesustrejo10.simplerssreader.data.RestConstants
 import com.jesustrejo10.simplerssreader.data.RestConstants.Companion.DEBUG
+import com.jesustrejo10.simplerssreader.data.local.StaticValues
 import com.jesustrejo10.simplerssreader.data.remote.RemoteEndPoints
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
+import kotlin.jvm.Throws
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -29,8 +34,8 @@ object NetworkModule {
     fun provideGson() : Gson = GsonBuilder().setLenient().create()
 
     @Provides
-    @Singleton
     fun provideOkHttpClient() =
+
         if (DEBUG) { // debug ON
             val logger = HttpLoggingInterceptor()
             logger.level = HttpLoggingInterceptor.Level.BODY
@@ -39,16 +44,17 @@ object NetworkModule {
                 .readTimeout(100, TimeUnit.SECONDS)
                 .connectTimeout(100, TimeUnit.SECONDS)
                 .addNetworkInterceptor(StethoInterceptor())
+                .addNetworkInterceptor(getInterceptor())
                 .build()
         } else // debug OFF
             OkHttpClient.Builder()
                 .readTimeout(45, TimeUnit.SECONDS)
                 .connectTimeout(45, TimeUnit.SECONDS)
                 .addNetworkInterceptor(StethoInterceptor())
+                .addNetworkInterceptor(getInterceptor())
                 .build()
 
     @Provides
-    @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -58,7 +64,18 @@ object NetworkModule {
             .build()
 
     @Provides
-    @Singleton
     fun provideApiDefinitionService(retrofit: Retrofit) =
         retrofit.create(RemoteEndPoints::class.java)
+
+    private fun getInterceptor (): Interceptor {
+        val authValue = "Bearer "+StaticValues.AUTHENTICATION
+        return  object : Interceptor {
+            @Throws(IOException::class)
+            override fun intercept(chain: Interceptor.Chain): Response {
+                val request: Request =
+                    chain.request().newBuilder().addHeader("Authorization", authValue).build()
+                return chain.proceed(request)
+            }
+        }
+    }
 }

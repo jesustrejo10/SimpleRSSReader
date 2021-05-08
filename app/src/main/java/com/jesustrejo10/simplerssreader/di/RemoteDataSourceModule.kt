@@ -2,6 +2,7 @@ package com.jesustrejo10.simplerssreader.di
 
 import com.jesustrejo10.simplerssreader.data.remote.RemoteEndPoints
 import com.jesustrejo10.simplerssreader.data.remote.datasource.AuthenticationRemoteDataSource
+import com.jesustrejo10.simplerssreader.data.remote.datasource.RssRemoteDataSource
 import com.jesustrejo10.simplerssreader.data.remote.repository.AuthenticationRepository
 import dagger.Module
 import dagger.Provides
@@ -15,5 +16,10 @@ object RemoteDataSourceModule {
     @Provides
     fun provideSessionRepository(remoteEndPoints: RemoteEndPoints): AuthenticationRemoteDataSource {
         return AuthenticationRemoteDataSource(remoteEndPoints)
+    }
+
+    @Provides
+    fun provideRssRepository(remoteEndPoints: RemoteEndPoints): RssRemoteDataSource {
+        return RssRemoteDataSource(remoteEndPoints)
     }
 }
