@@ -65,8 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/info"
-        android:importantForAutofill="no"
-        android:text="cacciaresi" />
+        android:importantForAutofill="no"/>
 
     <EditText
         android:id="@+id/password"
@@ -75,7 +74,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:text="cacciaresi"
         android:hint="@string/password"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
