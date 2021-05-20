@@ -9,4 +9,6 @@
     <string name="empty_field">this field is required</string>
     <string name="rss_article_list">Rss Article List</string>
     <string name="no_articles_available">There are no articles available</string>
+    <string name="database_name">movie_db</string>
+    <string name="api_key">a23699d98306b3f2402653d126c1fc22</string>
 </resources>

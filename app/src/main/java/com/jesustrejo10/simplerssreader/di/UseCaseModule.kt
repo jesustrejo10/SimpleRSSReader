@@ -1,12 +1,10 @@
 package com.jesustrejo10.simplerssreader.di
 
+import com.jesustrejo10.simplerssreader.data.local.datasource.MovieDao
 import com.jesustrejo10.simplerssreader.data.remote.RemoteEndPoints
 import com.jesustrejo10.simplerssreader.data.remote.datasource.AuthenticationRemoteDataSource
 import com.jesustrejo10.simplerssreader.data.remote.datasource.RssRemoteDataSource
-import com.jesustrejo10.simplerssreader.model.usecases.GetArticlesForMyFeedUseCase
-import com.jesustrejo10.simplerssreader.model.usecases.LoginUseCase
-import com.jesustrejo10.simplerssreader.model.usecases.SignUpUserUseCase
-import com.jesustrejo10.simplerssreader.model.usecases.SubscribeToFeedUseCase
+import com.jesustrejo10.simplerssreader.model.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,6 +34,9 @@ object UseCaseModule {
         return GetArticlesForMyFeedUseCase(remoteDataSource)
     }
 
-
+    @Provides
+    fun provideGetMovieListUseCase(localDataSource : MovieDao ) : GetMovieListUseCase {
+        return GetMovieListUseCase(localDataSource)
+    }
 
 }

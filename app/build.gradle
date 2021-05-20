@@ -73,4 +73,9 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
     kapt "com.google.dagger:hilt-compiler:2.31.2-alpha"
 
+    //Room persistence
+    kapt "androidx.room:room-compiler:2.3.0"
+
+    //Kotlin Ext Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.3.0"
 }
