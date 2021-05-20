@@ -12,6 +12,10 @@ data class UiResponse <T> (
             return UiResponse(OperationStatus.SUCCESS,null,"",value)
         }
 
+        fun <T> success(value : T, message : String) : UiResponse<T>{
+            return UiResponse(OperationStatus.SUCCESS,null,message,value)
+        }
+
         fun <T> error(exception : Exception) : UiResponse<T>{
             return UiResponse(OperationStatus.ERROR,exception,
                 exception.message ?: "Unexpected Error, please try again",null)

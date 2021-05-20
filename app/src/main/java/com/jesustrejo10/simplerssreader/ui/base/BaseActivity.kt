@@ -5,6 +5,10 @@ import java.lang.Exception
 
 abstract class BaseActivity : AppCompatActivity() {
 
+    companion object{
+        const val OFF_LINE = "Connection with server unavailable, check your internet or try again later."
+    }
+
     private val loadingDialogFragment : LoadingDialogControl =
         LoadingDialogFragment()
 

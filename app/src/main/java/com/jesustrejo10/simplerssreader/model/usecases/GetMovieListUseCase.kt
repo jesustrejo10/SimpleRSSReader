@@ -36,6 +36,7 @@ class GetMovieListUseCase @Inject constructor(
         }
         return UseCaseResult.success(GetMovieListContainer(sourceType,movieList,message))
     }
+
 }
 
 private fun List<Movie>.toUiMovies(): List<com.jesustrejo10.simplerssreader.model.data.response.Movie> {
