@@ -1,14 +1,17 @@
 package com.jesustrejo10.simplerssreader.ui.list
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jesustrejo10.simplerssreader.R
 import com.jesustrejo10.simplerssreader.model.data.response.Movie
 import com.jesustrejo10.simplerssreader.ui.base.BaseActivity
 import com.jesustrejo10.simplerssreader.ui.model.OperationStatus
 import com.jesustrejo10.simplerssreader.ui.model.UiResponse
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.movie_list_activity.*
 
 @AndroidEntryPoint
 class MovieListActivity : BaseActivity() {
@@ -41,11 +44,13 @@ class MovieListActivity : BaseActivity() {
         if(it != null){
             when(it.status){
                 OperationStatus.SUCCESS -> {
+                    dismissEmptyStatus()
                     dismissLoading()
-                    handleSuccessScenario(it.value)
+                    handleSuccessScenario(it.value,it.message)
                 }
                 OperationStatus.ERROR -> {
                     dismissLoading()
+                    displayEmptyStatus()
                 }
                 OperationStatus.IN_PROGRESS ->
                     displayLoading()
@@ -53,20 +58,40 @@ class MovieListActivity : BaseActivity() {
         }
     }
 
-    private fun handleSuccessScenario(movieList: List<Movie>?) {
+    private fun handleSuccessScenario(movieList: List<Movie>?, message: String) {
         if(movieList.isNullOrEmpty()){
             displayEmptyStatus()
         }else{
             displayList(movieList)
+            if(message.isNotEmpty())
+                displayNoInternet()
+            else
+                dismissNoInternet()
         }
     }
 
-    private fun displayEmptyStatus() {
-        println("")
+
+    private fun dismissNoInternet() {
+        no_internet.visibility = View.GONE
     }
 
+    private fun displayNoInternet() {
+        no_internet.visibility = View.VISIBLE
+    }
+
+    private fun displayEmptyStatus() {
+        no_internet_and_no_data.visibility = View.VISIBLE
+    }
+
+    private fun dismissEmptyStatus() {
+        no_internet_and_no_data.visibility = View.GONE
+    }
+
+
     private fun displayList(movieList: List<Movie>) {
-        println("")
+        val adapter = MovieListAdapter(movieList)
+        movieListRecyclerView.layoutManager = LinearLayoutManager(this)
+        movieListRecyclerView.adapter = adapter
     }
 
 

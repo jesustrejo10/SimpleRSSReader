@@ -11,4 +11,6 @@
     <string name="no_articles_available">There are no articles available</string>
     <string name="database_name">movie_db</string>
     <string name="api_key">a23699d98306b3f2402653d126c1fc22</string>
+    <string name="no_internet">Unable to display any movie, check your internet connection and try again, if the error persist, contact support.</string>
+    <string name="off_line_mode">You have no internet connection, we are displaying this list from your internal storage.</string>
 </resources>
