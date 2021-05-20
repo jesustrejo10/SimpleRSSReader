@@ -15,8 +15,4 @@ abstract class MovieDao  {
     @Query("SELECT * FROM movies")
     abstract fun getMovies(): List<Movie>
 
-    @Transaction
-    @Query("SELECT * FROM movies WHERE id = :id")
-    abstract fun getById(id: Int): Movie
-
 }
