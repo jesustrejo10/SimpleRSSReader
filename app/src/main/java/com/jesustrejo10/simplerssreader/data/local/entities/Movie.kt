@@ -13,22 +13,10 @@ data class Movie(
     var title: String?,
     @ColumnInfo(name = "release_date")
     var releaseDate: String?,
-    @ColumnInfo(name = "type")
-    var type: String?,
     @ColumnInfo(name = "backdrop_path")
     var backdropPath: String?,
-    @ColumnInfo(name = "original_language")
-    var originalLanguage: String?,
-    @ColumnInfo(name = "original_title")
-    var originalTitle: String?,
     @ColumnInfo(name = "overview")
     var overview: String?,
-    @ColumnInfo(name = "popularity")
-    var popularity: Double?,
-    @ColumnInfo(name = "poster_path")
-    var posterPath: String?,
-    @ColumnInfo(name = "video")
-    var video: Boolean?,
     @ColumnInfo(name = "vote_average")
     var voteAverage: Double?,
     @ColumnInfo(name = "vote_count")

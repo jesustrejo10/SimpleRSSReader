@@ -9,7 +9,10 @@ abstract class MovieDao  {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insert(vararg args: Movie)
 
-    @Query("SELECT * FROM movies ORDER BY popularity DESC")
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insert(args: List<Movie>)
+
+    @Query("SELECT * FROM movies")
     abstract fun getMovies(): List<Movie>
 
     @Transaction

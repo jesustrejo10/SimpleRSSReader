@@ -1,7 +1,6 @@
 package com.jesustrejo10.simplerssreader.data.remote.datasource
 
-import com.jesustrejo10.simplerssreader.data.remote.RemoteEndPoints
-import com.jesustrejo10.simplerssreader.data.remote.repository.AuthenticationRepository
+import com.jesustrejo10.simplerssreader.data.remote.EndPoints
 import com.jesustrejo10.simplerssreader.data.remote.repository.RssRepository
 import com.jesustrejo10.simplerssreader.model.data.request.SubscribeToFeedRequest
 import com.jesustrejo10.simplerssreader.model.data.response.RssArticle
@@ -10,7 +9,7 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class RssRemoteDataSource @Inject constructor(
-    private val apiDefinitionService: RemoteEndPoints
+    private val apiDefinitionService: EndPoints
 ) :
     BaseDataSource(), RssRepository {
 

@@ -1,8 +1,8 @@
 package com.jesustrejo10.simplerssreader.di
 
 import com.jesustrejo10.simplerssreader.data.local.datasource.MovieDao
-import com.jesustrejo10.simplerssreader.data.remote.RemoteEndPoints
 import com.jesustrejo10.simplerssreader.data.remote.datasource.AuthenticationRemoteDataSource
+import com.jesustrejo10.simplerssreader.data.remote.datasource.MoviesRemoteDataSource
 import com.jesustrejo10.simplerssreader.data.remote.datasource.RssRemoteDataSource
 import com.jesustrejo10.simplerssreader.model.usecases.*
 import dagger.Module
@@ -35,8 +35,8 @@ object UseCaseModule {
     }
 
     @Provides
-    fun provideGetMovieListUseCase(localDataSource : MovieDao ) : GetMovieListUseCase {
-        return GetMovieListUseCase(localDataSource)
+    fun provideGetMovieListUseCase(localDataSource : MovieDao, remoteDataSource: MoviesRemoteDataSource) : GetMovieListUseCase {
+        return GetMovieListUseCase(localDataSource,remoteDataSource)
     }
 
 }

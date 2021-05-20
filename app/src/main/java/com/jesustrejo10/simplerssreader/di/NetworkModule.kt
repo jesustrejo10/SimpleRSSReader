@@ -7,7 +7,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.jesustrejo10.simplerssreader.data.RestConstants
 import com.jesustrejo10.simplerssreader.data.RestConstants.Companion.DEBUG
 import com.jesustrejo10.simplerssreader.data.local.StaticValues
-import com.jesustrejo10.simplerssreader.data.remote.RemoteEndPoints
+import com.jesustrejo10.simplerssreader.data.remote.EndPoints
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +28,7 @@ import kotlin.jvm.Throws
 object NetworkModule {
 
     @Provides
-    fun provideBaseUrl() = RestConstants.API_SERVER_BASE_URL
+    fun provideBaseUrl() = RestConstants.MOVIE_API_SERVER_BASE_URL
 
     @Provides
     fun provideGson() : Gson = GsonBuilder().setLenient().create()
@@ -44,18 +44,18 @@ object NetworkModule {
                 .readTimeout(100, TimeUnit.SECONDS)
                 .connectTimeout(100, TimeUnit.SECONDS)
                 .addNetworkInterceptor(StethoInterceptor())
-                .addNetworkInterceptor(getInterceptor())
+                //.addNetworkInterceptor(getInterceptor())
                 .build()
         } else // debug OFF
             OkHttpClient.Builder()
                 .readTimeout(45, TimeUnit.SECONDS)
                 .connectTimeout(45, TimeUnit.SECONDS)
                 .addNetworkInterceptor(StethoInterceptor())
-                .addNetworkInterceptor(getInterceptor())
+                //.addNetworkInterceptor(getInterceptor())
                 .build()
 
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
+    fun provideRssRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
@@ -65,7 +65,7 @@ object NetworkModule {
 
     @Provides
     fun provideApiDefinitionService(retrofit: Retrofit) =
-        retrofit.create(RemoteEndPoints::class.java)
+        retrofit.create(EndPoints::class.java)
 
     private fun getInterceptor (): Interceptor {
         val authValue = "Bearer "+StaticValues.AUTHENTICATION

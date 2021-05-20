@@ -14,7 +14,8 @@ class MovieListViewModel @Inject constructor(val getMoviesUseCase: GetMovieListU
 
     fun getMovies() {
         viewModelScope.launch(Dispatchers.IO) {
-            getMoviesUseCase.invoke(Unit)
+            val test =getMoviesUseCase.invoke(Unit)
+            println("")
         }
     }
 
