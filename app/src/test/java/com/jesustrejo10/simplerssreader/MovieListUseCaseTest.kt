@@ -6,8 +6,10 @@ import com.jesustrejo10.simplerssreader.data.remote.repository.MoviesRepository
 import com.jesustrejo10.simplerssreader.model.data.response.GetMoviesResponse
 import com.jesustrejo10.simplerssreader.model.usecases.GetMovieListUseCase
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.lang.Exception
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -16,7 +18,7 @@ import org.junit.Test
  */
 class MovieListUseCaseTest {
 
-    lateinit var repo : MoviesRepository
+    lateinit var repo : MockRepo
     lateinit var localDataSource : MovieDao
     lateinit var useCaseResult : GetMovieListUseCase
 
@@ -28,11 +30,16 @@ class MovieListUseCaseTest {
     }
 
     @Test
-    fun addition_isCorrect() {
+    fun shouldReturnFailure() {
         runBlocking<Unit> {
-            useCaseResult.invoke(Unit)
+            repo.status = 1
+            val result = useCaseResult.invoke(Unit)
+            Assert.assertEquals(result.success,false)
+            Assert.assertEquals(result.errorMessage,"Unexpected Error, please contact support.")
+            Assert.assertEquals(result.value,null)
         }
     }
+
 }
 
 
@@ -50,7 +57,12 @@ class MockDao : MovieDao() {
 }
 
 class MockRepo : MoviesRepository {
+
+    var status : Int =0
     override suspend fun getMovies(): GetMoviesResponse {
+        when(status){
+            1-> throw Exception()
+        }
         return GetMoviesResponse(emptyList())
     }
 }
